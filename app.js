@@ -16,7 +16,7 @@ require('./models/Users');
 require('./config/passport');
 
 //connect mongodb
-mongoose.connect('mongodb://kasddd:kasdd@ds139288.mlab.com:39288/flapperdb', function(err,db){
+mongoose.connect('mongodb://<dbowner>:<flappernews>@ds149743.mlab.com:49743/flappernews', function(err,db){
     if (!err){
         console.log('Connected to /flappernews!');
     } else{
