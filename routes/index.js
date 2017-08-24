@@ -219,8 +219,10 @@ router.post('/login', function (req, res, next) {
   })(req, res, next);
 });
 
-router.post('/image/cancas', function(req, res, next){
+router.post('/upload/image', function(req, res, next){
+  console.log(req);
   var canvas = new Canvas();
+  console.log(req);
   canvas.image = req.body.imageUrl;
   canvas.save(function(err, canvas){
     if(err){
