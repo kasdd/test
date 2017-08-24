@@ -7,6 +7,7 @@ var jwt = require('express-jwt');
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 var User = mongoose.model('User');
+var Canvas = mongoose.model('Canvas');
 
 //De optie userProperty wordt gebruikt om de property req te specificeren (user by default, wij payload)
 var auth = jwt({
@@ -171,6 +172,7 @@ router.put('/posts/:post/comments/:comment/downvote', auth, function (req, res, 
   });
 });
 
+
 router.post('/register', function (req, res, next) {
   if (!req.body.username || !req.body.password) {
     return res.status(400).json({
@@ -215,4 +217,25 @@ router.post('/login', function (req, res, next) {
       return res.status(401).json(info);
     }
   })(req, res, next);
+});
+
+router.post('/image/cancas', function(req, res, next){
+  var canvas = new Canvas();
+  canvas.image = req.body.imageUrl;
+  canvas.save(function(err, canvas){
+    if(err){
+      return next(err);
+    }
+
+    res.json(canvas);
+  })
+});
+
+router.get('/images', function (req, res, next) {
+  Canvas.find(function (err, canvas) {
+    if (err) {
+      return next(err);
+    }
+    res.json(canvas);
+  });
 });
