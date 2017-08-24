@@ -221,9 +221,7 @@ router.post('/login', function (req, res, next) {
 
 router.post('/upload/image', function(req, res, next){
   console.log(req);
-  var canvas = new Canvas();
-  console.log(req);
-  canvas.image = req.body.imageUrl;
+  var canvas = new Canvas(req.body);
   canvas.save(function(err, canvas){
     if(err){
       return next(err);
